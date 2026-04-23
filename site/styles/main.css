@@ -10,6 +10,10 @@
   --accent: #183153;
   --accent-strong: #0f2741;
   --accent-soft: rgba(24, 49, 83, 0.1);
+  --violet: #6d4fd6;
+  --violet-strong: #5638c5;
+  --violet-soft: rgba(109, 79, 214, 0.12);
+  --violet-glow: rgba(146, 122, 255, 0.24);
   --shadow: 0 20px 45px rgba(24, 34, 47, 0.08);
   --radius-sm: 0.9rem;
   --radius-md: 1.3rem;
@@ -49,7 +53,9 @@ body {
   line-height: 1.65;
   background:
     radial-gradient(circle at 10% 10%, rgba(193, 208, 228, 0.55), transparent 28%),
+    radial-gradient(circle at 78% 8%, var(--violet-glow), transparent 24%),
     radial-gradient(circle at 90% 18%, rgba(236, 224, 199, 0.6), transparent 30%),
+    radial-gradient(circle at 24% 78%, rgba(109, 79, 214, 0.08), transparent 24%),
     linear-gradient(180deg, #f8f5ee 0%, #f4efe6 40%, #f7f4ed 100%);
 }
 
@@ -108,7 +114,7 @@ svg {
 }
 
 :focus-visible {
-  outline: 3px solid rgba(24, 49, 83, 0.35);
+  outline: 3px solid rgba(109, 79, 214, 0.34);
   outline-offset: 3px;
 }
 
@@ -167,7 +173,7 @@ svg {
   border-radius: 0.95rem;
   color: #fff;
   font-size: 1rem;
-  background: linear-gradient(135deg, var(--accent) 0%, #2a527d 100%);
+  background: linear-gradient(135deg, var(--accent) 0%, var(--violet) 100%);
   box-shadow: var(--shadow);
 }
 
@@ -200,7 +206,7 @@ svg {
 .footer-nav a:hover,
 .site-nav a[aria-current="true"] {
   color: var(--accent);
-  background: rgba(24, 49, 83, 0.08);
+  background: linear-gradient(135deg, rgba(24, 49, 83, 0.08), var(--violet-soft));
 }
 
 .hero-section {
@@ -229,6 +235,8 @@ svg {
 }
 
 .hero-copy {
+  position: relative;
+  overflow: hidden;
   padding: clamp(2rem, 4vw, 3.5rem);
   border-radius: var(--radius-lg);
   display: flex;
@@ -237,10 +245,25 @@ svg {
   min-height: 33rem;
   opacity: 0;
   transform: translateY(24px);
+  background:
+    radial-gradient(circle at 88% 18%, rgba(109, 79, 214, 0.14), transparent 22%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.72));
 }
 
 body.is-ready .hero-copy {
   animation: hero-fade-up 0.8s ease forwards;
+}
+
+.hero-copy::after {
+  content: "";
+  position: absolute;
+  right: -3rem;
+  top: -2.5rem;
+  width: 13rem;
+  height: 13rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(109, 79, 214, 0.2) 0%, rgba(109, 79, 214, 0) 72%);
+  pointer-events: none;
 }
 
 .eyebrow,
@@ -285,7 +308,7 @@ body.is-ready .hero-copy {
   align-items: center;
   padding: 0.55rem 0.9rem;
   border-radius: 999px;
-  background: rgba(24, 49, 83, 0.08);
+  background: linear-gradient(135deg, rgba(24, 49, 83, 0.08), var(--violet-soft));
   color: var(--accent);
   font-size: var(--font-size-xs);
   font-weight: 600;
@@ -326,13 +349,13 @@ body.is-ready .hero-copy {
 
 .button-primary {
   color: #fff;
-  background: linear-gradient(135deg, var(--accent) 0%, #2e5c8f 100%);
-  box-shadow: 0 16px 28px rgba(24, 49, 83, 0.2);
+  background: linear-gradient(135deg, var(--accent) 0%, var(--violet) 100%);
+  box-shadow: 0 16px 28px rgba(90, 64, 187, 0.24);
 }
 
 .button-secondary {
   color: var(--accent);
-  background: rgba(24, 49, 83, 0.08);
+  background: linear-gradient(135deg, rgba(24, 49, 83, 0.08), var(--violet-soft));
 }
 
 .hero-panel {
@@ -342,6 +365,9 @@ body.is-ready .hero-copy {
   flex-direction: column;
   justify-content: space-between;
   gap: 1.5rem;
+  background:
+    linear-gradient(160deg, rgba(255, 255, 255, 0.82), rgba(247, 243, 255, 0.88)),
+    var(--surface);
 }
 
 .panel-title,
@@ -368,7 +394,7 @@ body.is-ready .hero-copy {
   padding: 1rem 1.05rem;
   border-radius: var(--radius-md);
   background: var(--surface-strong);
-  border: 1px solid rgba(24, 34, 47, 0.08);
+  border: 1px solid rgba(109, 79, 214, 0.12);
 }
 
 .glance-label {
@@ -442,6 +468,9 @@ body.is-ready .hero-copy {
 .strength-card {
   padding: 1.35rem;
   border-radius: var(--radius-md);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.84), rgba(248, 244, 255, 0.78)),
+    var(--surface);
 }
 
 .strength-index {
@@ -478,6 +507,8 @@ body.is-ready .hero-copy {
 .project-card {
   padding: 1.5rem;
   border-radius: var(--radius-lg);
+  position: relative;
+  overflow: hidden;
 }
 
 .card-topline {
@@ -522,7 +553,7 @@ body.is-ready .hero-copy {
 
 .skills-card h3 {
   margin-bottom: 1rem;
-  color: var(--accent);
+  color: var(--violet-strong);
   font-size: 1.1rem;
 }
 
@@ -544,10 +575,19 @@ body.is-ready .hero-copy {
   margin-top: 1.3rem;
 }
 
+.project-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 0.28rem;
+  background: linear-gradient(90deg, var(--accent), var(--violet));
+}
+
 .brief-block {
   padding: 1rem 1.05rem;
   border-radius: var(--radius-md);
-  background: var(--surface-strong);
+  background: linear-gradient(180deg, var(--surface-strong), rgba(248, 244, 255, 0.86));
   border: 1px solid rgba(24, 34, 47, 0.08);
 }
 
@@ -568,7 +608,7 @@ body.is-ready .hero-copy {
 .contact-shell {
   padding: clamp(1.6rem, 4vw, 2.5rem);
   background:
-    linear-gradient(145deg, rgba(24, 49, 83, 0.06), rgba(255, 255, 255, 0.78)),
+    linear-gradient(145deg, rgba(24, 49, 83, 0.06), rgba(109, 79, 214, 0.08), rgba(255, 255, 255, 0.78)),
     var(--surface);
 }
 
